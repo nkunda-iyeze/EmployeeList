@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import {Link } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
+//* import apiRequest from "../apiRequest";
 const EmployeeList = () => {
     const [employeeData, setEmployeeData] =useState([]);
     //! const [newEmployeeData, setNewEmployeeData] =useState([]);
     const [fetchError,setfetchError] = useState("");
-    const [isLoading,setIsLoading] = useState(true)
-
+    const [isLoading,setIsLoading] = useState(true);
+    const navigate = useNavigate();
+    
     //* fecthing data from db.json
-
     useEffect(()=>{
         const fetchEmployees = async()=>{
           try {
@@ -23,10 +24,30 @@ const EmployeeList = () => {
       }
       setTimeout(()=>{
         (async () =>await fetchEmployees())();
-      },2000);
-      
-       
+      },100); 
     },[]);
+
+    const editFuction = (id) =>{
+     
+      navigate("/employee/edit/"+id);
+    };
+    const removeFuction = (id) =>{
+    if(window.confirm("Are you sure you want to remove this ?")){
+      fetch("http://localhost:5000/employees/"+id,{
+      method: "DELETE",
+      
+    }).then(() => {
+      alert("Removed Successfully !");
+      window.location.reload()
+    }).catch((error) => {
+      console.log(error.message)
+    });
+    }
+    };
+    const detailsFuction = (id) =>{
+    
+      navigate("/employee/detail/"+id);
+    };
   return (
     <div className="flex flex-col justify-items-center items-center">
         <div className="my-6 bg-slate-700 px-10 py-4">
@@ -63,9 +84,9 @@ const EmployeeList = () => {
                 <td className="whitespace-nowrap px-6 py-4 border-r"> {data.email} </td>
                 <td className="whitespace-nowrap px-6 py-4 border-r"> {data.phone} </td>
                 <td className="whitespace-nowrap px-6 py-4 border-r"> 
-                    <Link className="bg-yellow-500 p-2 rounded font-bold uppercase text-lg mx-1 cursor-pointer">Edit</Link>
-                    <Link className="bg-red-400 p-2 rounded font-bold uppercase text-lg mx-1 cursor-pointer">Delete</Link>
-                    <Link className="bg-blue-400 p-2 rounded font-bold uppercase text-lg mx-1 cursor-pointer">Details</Link>
+                    <button href="" className="bg-yellow-500 p-2 rounded font-bold uppercase text-lg mx-1 cursor-pointer" onClick={()=>{editFuction(data.id)}}>Edit</button>
+                    <button href="" className="bg-red-400 p-2 rounded font-bold uppercase text-lg mx-1 cursor-pointer" onClick={()=>{removeFuction(data.id)}}>Delete</button>
+                    <button href="" className="bg-blue-400 p-2 rounded font-bold uppercase text-lg mx-1 cursor-pointer" onClick={()=>{detailsFuction(data.id)}}>Details</button>
                  </td>
               </tr>))
             }

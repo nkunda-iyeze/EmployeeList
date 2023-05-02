@@ -7,7 +7,9 @@ const apiRequest = async(url="",optionObjs =null,errMessage =null)=>{
         const data = await response.json();
         return data;
     }catch(err){
-        console.log(err);
+        errMessage = err.message;
+        return errMessage;
+    } finally{
         return errMessage;
     }
 }

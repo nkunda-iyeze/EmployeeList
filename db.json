@@ -6,6 +6,20 @@
       "email": "shalom.iyeze@gmail.com",
       "phone": "+250791010447",
       "action": false
+    },
+    {
+      "id": 2,
+      "name": "Mucyo Richard",
+      "email": "mucyo.riska33@gmail.com",
+      "phone": "0789176268",
+      "active": false
+    },
+    {
+      "name": "Kayishunge",
+      "email": "kayishunge.ett@gmail.com",
+      "phone": "07888888888",
+      "active": true,
+      "id": 3
     }
   ]
 }

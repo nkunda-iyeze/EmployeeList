@@ -4,6 +4,7 @@ import EmployeeEdit from "./components/EmployeeEdit";
 import EmployeeList from "./components/EmployeeList";
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 const App = () => {
+ 
   return (
    
      <div >
@@ -11,8 +12,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<EmployeeList/>} />
         <Route path="/employee/create" element={<EmployeeCreate/>} />
-        <Route path="/employee/details/id" element={<EmployeeDetails/>} />
-        <Route path="/employee/edit/id" element={<EmployeeEdit/>} />
+        <Route path="/employee/detail/:id" element={<EmployeeDetails/>} />
+        <Route path="/employee/edit/:id" element={<EmployeeEdit/>} />
       </Routes>
       </BrowserRouter>
      </div>
